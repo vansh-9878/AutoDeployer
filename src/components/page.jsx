@@ -1,14 +1,14 @@
-import { PlusCircle, User } from "lucide-react"
-import "./styles.css"
-import ProjectList from "./project-list"
+import { PlusCircle, User } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import "./styles.css";
+import ProjectList from "./project-list";
 
-// Dummy projects data
 const dummyProjects = [
   {
     id: "1",
     name: "E-commerce Website",
     description: "Online store with product catalog and payment integration",
-    status: "online" ,
+    status: "online",
     lastDeployed: "2 hours ago",
     url: "https://ecommerce-example.vercel.app",
   },
@@ -16,7 +16,7 @@ const dummyProjects = [
     id: "2",
     name: "Portfolio Site",
     description: "Personal portfolio showcasing projects and skills",
-    status: "online" ,
+    status: "online",
     lastDeployed: "3 days ago",
     url: "https://portfolio-example.vercel.app",
   },
@@ -28,17 +28,18 @@ const dummyProjects = [
     lastDeployed: "1 day ago",
     url: "https://blog-api-example.vercel.app",
   },
-]
+];
 
 export default function HomePage() {
+  const navigate = useNavigate(); // Initialize navigation
+
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Navigation Bar */}
       <nav className="nav">
         <div className="container flex justify-between items-center">
           <h1 className="text-2xl font-bold text-gray-800">Auto Deployer</h1>
           <div className="flex gap-4">
-            <button className="btn btn-lg btn-primary">
+            <button onClick={() => navigate("/new-project")} className="btn btn-lg btn-primary">
               <PlusCircle className="mr-2 h-5 w-5" />
               Create New Project
             </button>
@@ -50,16 +51,12 @@ export default function HomePage() {
         </div>
       </nav>
 
-      {/* Main Content */}
       <main className="main container">
         <div className="flex flex-col md-flex-row gap-6">
-          {/* Projects List (60%) */}
           <div className="md-w-3-5">
             <h2 className="text-xl font-semibold mb-4">Your Deployed Projects</h2>
             <ProjectList projects={dummyProjects} />
           </div>
-
-          {/* Graph Area (40%) - Fixed on scroll */}
           <div className="md-w-2-5">
             <div className="analytics sticky">
               <h2 className="text-xl font-semibold mb-4">Analytics</h2>
@@ -71,6 +68,5 @@ export default function HomePage() {
         </div>
       </main>
     </div>
-  )
+  );
 }
-
