@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --primary-color: #3b82f6;
   --primary-light: #93c5fd;
@@ -14,6 +18,21 @@
   --red-800: #991b1b;
   --yellow-100: #fef9c3;
   --yellow-800: #854d0e;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-appear {
+  animation: appear 0.3s ease-out;
 }
 
 * {
