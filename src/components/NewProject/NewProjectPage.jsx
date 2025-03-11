@@ -18,8 +18,9 @@ export function NewProjectPage() {
 
   const handleDeploy = () => {
     setShowProgress(true);
+    console.log("hello");
     if (localStorage.getItem("newname")) {
-      obj = {
+      let obj = {
         id: "4",
         name: localStorage.getItem("newname"),
         description: "Backend API for a content management system",
@@ -27,8 +28,8 @@ export function NewProjectPage() {
         lastDeployed: "Just now",
         url: "https://blog-api-example.vercel.app",
       };
-      arr = newProject;
-      arr.append(obj);
+      let arr = [...newProject];
+      arr.push(obj);
       setNewProject(arr);
       localStorage.setItem("projects", JSON.stringify(arr));
     }
