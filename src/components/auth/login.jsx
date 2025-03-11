@@ -3,10 +3,11 @@ import "./styles.css";
 import { useState } from "react"
 // import { signIn } from "next-auth/react"
 import { Github, Mail } from "lucide-react"
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false)
-
+  const navigate = useNavigate();
   const handleGithubLogin = async () => {
     // setIsLoading(true)
     // try {
@@ -24,7 +25,7 @@ export default function LoginPage() {
         <h1 className="login-title">Welcome to Auto Deployer</h1>
         <p className="login-subtitle">Sign in to deploy your projects with ease</p>
 
-        <button className="login-btn" onClick={handleGithubLogin} disabled={isLoading}>
+        <button className="login-btn" onClick={()=>navigate("/")} disabled={isLoading}>
           {isLoading ? <span className="loading-spinner"></span> : <Github className="w-5 h-5" />}
           Sign in with GitHub
         </button>

@@ -1,3 +1,4 @@
+import "./styles.css";
 import {
   User,
   Package,
@@ -6,12 +7,13 @@ import {
   ArrowRight,
   Link,
 } from "lucide-react";
-import "./styles.css";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../Navbar";
 
 export default function ProfilePage() {
   const navigate = useNavigate();
   return (
+    <>
     <div className="profile-container">
       <div className="container">
         <div className="profile-header">
@@ -190,5 +192,6 @@ export default function ProfilePage() {
         </div>
       </div>
     </div>
+    </>
   );
 }
