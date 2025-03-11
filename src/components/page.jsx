@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import "./styles.css";
 import ProjectList from "./project-list";
 import Navbar from "./Navbar";
+import CPUUsageGraph from "./Graph";
 
 const dummyProjects = [
   {
@@ -46,7 +47,7 @@ export default function HomePage() {
             <div className="analytics-box">
               <h2 className="section-title">Analytics</h2>
               <div className="analytics-placeholder">
-                <p>Graph will appear here</p>
+                <CPUUsageGraph/>
               </div>
             </div>
           </div>

@@ -477,4 +477,31 @@
     }
   }
   
+  .nav-bar {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #374151;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
   
+  
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .nav-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+  }
+  
+  .nav-buttons {
+    display: flex;
+    gap: 10px;
+  }
