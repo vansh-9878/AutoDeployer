@@ -34,7 +34,7 @@ export default function HomePage() {
   const navigate = useNavigate(); // Initialize navigation
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="container-main min-h-screen bg-gray-50">
       <nav className="nav">
         <div className="container flex justify-between items-center">
           <h1 className="text-2xl font-bold text-gray-800">Auto Deployer</h1>
