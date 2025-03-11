@@ -6,7 +6,7 @@
 .container-main {
   min-height: 100vh;
   background-color: #f9fafb;
-  padding: 20px;
+  padding-inline: 20px;
   background: linear-gradient(
     to bottom right,
     rgb(17, 24, 39),
@@ -14,37 +14,39 @@
     rgb(88, 28, 135)
     );
     color: white;
-  }
+}
   
-  .nav-bar {
-    padding: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #374151;
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.1);
-  }
+.nav-bar {
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
   
   
-  .nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  .nav-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: white;
-  }
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nav-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+}
   
-  .nav-buttons {
-    display: flex;
-    gap: 10px;
-  }
+.nav-buttons {
+  display: flex;
+  gap: 10px;
+}
 
 .btn-primary, .btn-outline {
   padding: 10px 16px;
@@ -74,7 +76,7 @@
 }
 
 .main-container {
-  max-width: 1200px;
+  max-width: 1500px;
   margin: 20px auto;
 }
 
@@ -83,13 +85,15 @@
 }
 
 .project-section, .analytics-section {
-  background: rgba(255, 255, 255, 0.1);
   padding: 20px;
-  border-radius: 8px;
   width: 70%;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  margin-left: 10px;
+  margin-inline: 5px;
   color: white;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .section-title {
