@@ -1,7 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./components/page";
 import { NewProjectPage } from "./components/NewProject/NewProjectPage.jsx";
-import Project from "./Project.jsx";
+import Project from "./components/ProjectPage/Project.jsx";
+import ProfilePage from "./components/auth/profile.jsx";
+import LoginPage from "./components/auth/login.jsx";
 
 function App() {
   return (
@@ -10,6 +12,8 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/new-project" element={<NewProjectPage />} />
         <Route path="/myproject/:id" element={<Project />} />
+        <Route path="/profile" element={<ProfilePage/>}/>
+        <Route path="/login" element={<LoginPage/>}/>
       </Routes>
     </Router>
   );

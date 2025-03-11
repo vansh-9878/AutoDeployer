@@ -1,21 +1,21 @@
-"use client"
+import "./styles.css";
 
 import { useState } from "react"
-import { signIn } from "next-auth/react"
+// import { signIn } from "next-auth/react"
 import { Github, Mail } from "lucide-react"
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false)
 
   const handleGithubLogin = async () => {
-    setIsLoading(true)
-    try {
-      await signIn("github", { callbackUrl: "/dashboard" })
-    } catch (error) {
-      console.error("Login failed:", error)
-    } finally {
-      setIsLoading(false)
-    }
+    // setIsLoading(true)
+    // try {
+    //   await signIn("github", { callbackUrl: "/dashboard" })
+    // } catch (error) {
+    //   console.error("Login failed:", error)
+    // } finally {
+    //   setIsLoading(false)
+    // }
   }
 
   return (

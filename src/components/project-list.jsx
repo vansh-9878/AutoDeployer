@@ -2,19 +2,14 @@ import React from "react";
 import { ExternalLink, Settings } from "lucide-react";
 
 export default function ProjectList({ projects }) {
-  // If there are no projects, display a message
   if (projects.length === 0) {
     return (
-      <div className="empty-state">
+      <div className="empty-container">
         <div>
-          <h3 className="text-lg font-medium text-gray-700 mb-2">
-            You are yet to deploy your projects
-          </h3>
-          <p className="text-gray-500 mb-6">
-            Create your first project to get started
-          </p>
-          <button className="btn btn-primary">
-            <PlusCircle className="mr-2 h-5 w-5" />
+          <h3 className="empty-title">You are yet to deploy your projects</h3>
+          <p className="empty-message">Create your first project to get started</p>
+          <button className="button-primary">
+            <PlusCircle className="icon-small" />
             Create New Project
           </button>
         </div>
@@ -22,9 +17,8 @@ export default function ProjectList({ projects }) {
     );
   }
 
-  // Display the list of projects
   return (
-    <div className="project-list">
+    <div className="project-wrapper">
       {projects.map((project) => (
         <ProjectCard key={project.id} project={project} />
       ))}
@@ -34,40 +28,26 @@ export default function ProjectList({ projects }) {
 
 function ProjectCard({ project }) {
   return (
-    <div className="card">
-      <div className="card-header">
-        <div className="flex justify-between items-start">
+    <div className="project-card">
+      <div className="card-top">
+        <div className="card-header">
           <div>
-            <h3 className="card-title">{project.name}</h3>
-            <p className="card-description">{project.description}</p>
+            <h3 className="project-title" style={{color:"white"}}>{project.name}</h3>
+            <p className="project-description" >{project.description}</p>
           </div>
           <StatusBadge status={project.status} />
         </div>
       </div>
-      <div className="card-content">
-        <div className="flex justify-between items-center">
-          <div className="text-sm text-gray-500">
-            Last deployed: {project.lastDeployed}
-          </div>
-          <div className="flex gap-2">
-            <button className="btn btn-sm btn-outline">
-              <Settings className="h-4 w-4 mr-1" />
-              Settings
-            </button>
-            {/* <button className="btn btn-sm btn-primary">
-              <ExternalLink
-                href={`/myproject/${project.id}`}
-                className="h-4 w-4 mr-1"
-              />
-              Visit
-            </button> */}
+      <div className="card-bottom">
+        <div className="card-info">
+          <div className="deploy-time">Last deployed: {project.lastDeployed}</div>
+          <div className="button-group">
+            
             <button
-              className="btn btn-sm btn-primary flex items-center"
-              onClick={() =>
-                (window.location.href = `/myproject/${project.id}`)
-              }
+              className="button-primary button-flex"
+              onClick={() => (window.location.href = `/myproject/${project.id}`)}
             >
-              <span className="h-4 w-4 mr-1">🔗</span> Visit
+              <span className="icon-text">🔗</span> Visit
             </button>
           </div>
         </div>
@@ -79,10 +59,10 @@ function ProjectCard({ project }) {
 function StatusBadge({ status }) {
   const badgeClass =
     status === "online"
-      ? "badge badge-online"
+      ? "status-badge online"
       : status === "offline"
-      ? "badge badge-offline"
-      : "badge badge-error";
+      ? "status-badge offline"
+      : "status-badge error";
 
   const text =
     status === "online" ? "Online" : status === "offline" ? "Offline" : "Error";

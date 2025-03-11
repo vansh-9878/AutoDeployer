@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Sidebar from "./components/Sidebar";
-import Dashboard from "./components/Tables";
+import Sidebar from "./Sidebar";
+import Dashboard from "./Tables"
 
 function Project() {
   const [activeSection, setActiveSection] = useState("health");
