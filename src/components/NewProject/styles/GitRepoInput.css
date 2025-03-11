@@ -1,0 +1,109 @@
+/* GitRepoInput.css */
+.repo-container {
+  width: 100%;
+  max-width: 48rem;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border-radius: 1rem;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.repo-button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  background-color: rgb(147, 51, 234);
+  color: white;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.2s;
+}
+
+.repo-button:hover {
+  background-color: rgb(126, 34, 206);
+}
+
+.input-container {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.25rem;
+  height: 1.25rem;
+  color: rgb(168, 85, 247);
+}
+
+.repo-input {
+  width: 100%;
+  padding: 1rem 8rem 1rem 3rem;
+  border-radius: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  transition: all 0.2s;
+}
+
+.repo-input::placeholder {
+  color: rgb(156, 163, 175);
+}
+
+.repo-input:focus {
+  outline: none;
+  border-color: transparent;
+  box-shadow: 0 0 0 2px rgb(147, 51, 234);
+}
+
+.connect-button-container {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.connect-button {
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.connect-button.enabled {
+  background-color: rgb(147, 51, 234);
+  color: white;
+}
+
+.connect-button.enabled:hover {
+  background-color: rgb(126, 34, 206);
+}
+
+.connect-button.disabled {
+  background-color: rgb(55, 65, 81);
+  color: white;
+  cursor: not-allowed;
+}
+
+.github-link {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgb(209, 213, 219);
+  transition: color 0.2s;
+}
+
+.github-link:hover {
+  color: white;
+}
