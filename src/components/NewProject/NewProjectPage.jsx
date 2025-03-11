@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { GitRepoInput } from './GitRepoInput';
 import { ProjectForm } from './ProjectForm';
 import { DeploymentProgress } from './DeploymentProgress';
+import './styles/NewProjectPage.css';
 
 export function NewProjectPage() {
     const [repoUrl, setRepoUrl] = useState('');
@@ -18,15 +19,16 @@ export function NewProjectPage() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-purple-900 py-12 px-4">
-            <div className="max-w-6xl mx-auto space-y-8">
+        <div className="page-container">
+            <div className="content-container">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
+                    className="header"
                 >
-                    <h1 className="text-4xl font-bold text-white text-center mb-2">Deploy Your Project</h1>
-                    <p className="text-gray-300 text-center mb-8">Get your application up and running in minutes</p>
+                    <h1 className="page-title">Deploy Your Project</h1>
+                    <p className="page-subtitle">Get your application up and running in minutes</p>
                 </motion.div>
 
                 <motion.div
@@ -57,21 +59,17 @@ export function NewProjectPage() {
 
                 <AnimatePresence>
                     {showProgress && (
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.95 }}
-                            transition={{ duration: 0.5 }}
-                            className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50"
-                        >
+                        <div className="modal-overlay">
                             <motion.div
-                                initial={{ y: 20 }}
-                                animate={{ y: 0 }}
-                                className="bg-white rounded-xl p-8 w-full max-w-3xl mx-4"
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.95 }}
+                                transition={{ duration: 0.5 }}
+                                className="modal-content"
                             >
                                 <DeploymentProgress />
                             </motion.div>
-                        </motion.div>
+                        </div>
                     )}
                 </AnimatePresence>
             </div>

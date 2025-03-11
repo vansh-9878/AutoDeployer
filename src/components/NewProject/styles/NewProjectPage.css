@@ -1,0 +1,55 @@
+/* NewProjectPage.css */
+.page-container {
+  min-height: 100vh;
+  background: linear-gradient(
+    to bottom right,
+    rgb(17, 24, 39),
+    rgb(31, 41, 55),
+    rgb(88, 28, 135)
+  );
+  padding: 3rem 1rem;
+}
+
+.content-container {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.header {
+  text-align: center;
+}
+
+.page-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.page-subtitle {
+  color: rgb(209, 213, 219);
+  margin-bottom: 2rem;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.modal-content {
+  background-color: white;
+  border-radius: 0.75rem;
+  padding: 2rem;
+  width: 100%;
+  max-width: 48rem;
+  margin: 0 1rem;
+}
