@@ -23,7 +23,7 @@ export function NewProjectPage() {
       let obj = {
         id: "4",
         name: localStorage.getItem("newname"),
-        description: "Backend API for a content management system",
+        description: "This is a new project",
         status: "online",
         lastDeployed: "Just now",
         url: "https://blog-api-example.vercel.app",
