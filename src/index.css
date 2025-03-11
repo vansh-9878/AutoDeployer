@@ -112,7 +112,8 @@ body {
 }
 
 .nav-item:hover {
-  background-color: var(--gray-100);
+  background-color: var(--primary-color);
+  color: var(--gray-50);
 }
 
 .nav-item.active {
