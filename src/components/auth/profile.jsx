@@ -1,11 +1,25 @@
-import { User, Package, Activity, GitBranch, ArrowRight } from "lucide-react"
+import {
+  User,
+  Package,
+  Activity,
+  GitBranch,
+  ArrowRight,
+  Link,
+} from "lucide-react";
+import "./styles.css";
+import { useNavigate } from "react-router-dom";
 
 export default function ProfilePage() {
+  const navigate = useNavigate();
   return (
     <div className="profile-container">
       <div className="container">
         <div className="profile-header">
-          <img src="https://github.com/identicons/app/oauth_app/1234" alt="Profile" className="profile-avatar" />
+          <img
+            src="https://github.com/identicons/app/oauth_app/1234"
+            alt="Profile"
+            className="profile-avatar"
+          />
           <h1 className="profile-name">John Doe</h1>
           <p className="profile-username">@johndoe</p>
 
@@ -23,11 +37,10 @@ export default function ProfilePage() {
               <span className="profile-stat-label">Teams</span>
             </div>
           </div>
-
-          <button className="btn btn-primary">
-            <Package className="w-5 h-5" />
-            New Project
-          </button>
+            <button className="btn btn-primary" onClick={() => navigate("/new-project")}>
+              <Package className="w-5 h-5" />
+              New Project
+            </button>
         </div>
 
         <div className="profile-content">
@@ -57,7 +70,9 @@ export default function ProfilePage() {
                 </div>
                 <div className="profile-project-info">
                   <h3 className="profile-project-name">Portfolio Site</h3>
-                  <p className="profile-project-description">Personal portfolio showcasing projects and skills</p>
+                  <p className="profile-project-description">
+                    Personal portfolio showcasing projects and skills
+                  </p>
                 </div>
                 <span className="profile-project-status">Online</span>
               </div>
@@ -68,17 +83,25 @@ export default function ProfilePage() {
                 </div>
                 <div className="profile-project-info">
                   <h3 className="profile-project-name">Blog API</h3>
-                  <p className="profile-project-description">Backend API for a content management system</p>
+                  <p className="profile-project-description">
+                    Backend API for a content management system
+                  </p>
                 </div>
                 <span
                   className="profile-project-status"
-                  style={{ backgroundColor: "rgba(239, 68, 68, 0.2)", color: "#ef4444" }}
+                  style={{
+                    backgroundColor: "rgba(239, 68, 68, 0.2)",
+                    color: "#ef4444",
+                  }}
                 >
                   Error
                 </span>
               </div>
 
-              <button className="btn btn-outline" style={{ width: "100%", marginTop: "1rem" }}>
+              <button
+                className="btn btn-outline"
+                style={{ width: "100%", marginTop: "1rem" }}
+              >
                 View All Projects
                 <ArrowRight className="w-4 h-4 ml-2" />
               </button>
@@ -137,11 +160,17 @@ export default function ProfilePage() {
                 Account Settings
               </h2>
 
-              <button className="btn btn-outline" style={{ width: "100%", marginBottom: "0.75rem" }}>
+              <button
+                className="btn btn-outline"
+                style={{ width: "100%", marginBottom: "0.75rem" }}
+              >
                 Edit Profile
               </button>
 
-              <button className="btn btn-outline" style={{ width: "100%", marginBottom: "0.75rem" }}>
+              <button
+                className="btn btn-outline"
+                style={{ width: "100%", marginBottom: "0.75rem" }}
+              >
                 API Keys
               </button>
 
@@ -161,6 +190,5 @@ export default function ProfilePage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
-
