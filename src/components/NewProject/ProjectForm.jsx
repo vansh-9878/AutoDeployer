@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Trash2, Wand2, Package, Terminal, GitBranch, Variable, Pocket as Docker, FileText, Command } from 'lucide-react';
 import './styles/ProjectForm.css';
 
 export function ProjectForm({ onDeploy, isActive }) {
     const [formData, setFormData] = useState({
         name: '',
-        language: 'Python 3',
         branch: 'main',
         deploymentType: '',
+        language: '',
         dockerCompose: {
             location: ''
         },
@@ -25,11 +25,13 @@ export function ProjectForm({ onDeploy, isActive }) {
             location: ''
         },
         singleCommand: {
-            command: ''
+            command: '',
+            language: 'Python 3'
         }
     });
 
     const [envVars, setEnvVars] = useState([]);
+    const [showLanguageSelect, setShowLanguageSelect] = useState(false);
 
     const addEnvVar = () => {
         setEnvVars([...envVars, { name: '', value: '' }]);
@@ -43,6 +45,35 @@ export function ProjectForm({ onDeploy, isActive }) {
         const newEnvVars = [...envVars];
         newEnvVars[index] = { ...newEnvVars[index], [field]: value };
         setEnvVars(newEnvVars);
+    };
+
+    const importEnvFile = async () => {
+        try {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.env';
+
+            input.onchange = async (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const text = await file.text();
+                    const vars = text.split('\n')
+                        .filter(line => line.trim() && !line.startsWith('#'))
+                        .map(line => {
+                            const [name, ...valueParts] = line.split('=');
+                            return {
+                                name: name.trim(),
+                                value: valueParts.join('=').trim()
+                            };
+                        });
+                    setEnvVars([...envVars, ...vars]);
+                }
+            };
+
+            input.click();
+        } catch (error) {
+            console.error('Error importing .env file:', error);
+        }
     };
 
     const deploymentOptions = [
@@ -99,38 +130,21 @@ export function ProjectForm({ onDeploy, isActive }) {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 }}
-                    className="grid-2"
                 >
-                    <div>
-                        <label className="input-label">Language</label>
-                        <div className="input-wrapper">
-                            <select
-                                value={formData.language}
-                                onChange={(e) => setFormData({ ...formData, language: e.target.value })}
-                                className="select-input"
-                            >
-                                <option>Python 3</option>
-                                <option>Node</option>
-                                <option>Rust</option>
-                            </select>
-                            <ChevronDown className="select-icon" />
-                        </div>
-                    </div>
-
-                    <div>
-                        <label className="input-label">Branch</label>
-                        <div className="input-wrapper">
-                            <GitBranch className="input-icon" />
-                            <select
-                                value={formData.branch}
-                                onChange={(e) => setFormData({ ...formData, branch: e.target.value })}
-                                className="select-input with-icon"
-                            >
-                                <option>main</option>
-                                <option>develop</option>
-                            </select>
-                            <ChevronDown className="select-icon" />
-                        </div>
+                    <label className="input-label">Branch</label>
+                    <div className="input-wrapper">
+                        <GitBranch className="input-icon" />
+                        <select
+                            value={formData.branch}
+                            onChange={(e) => setFormData({ ...formData, branch: e.target.value })}
+                            className="select-input with-icon"
+                        >
+                            <option value="main">main</option>
+                            <option value="develop">develop</option>
+                            <option value="staging">staging</option>
+                            <option value="production">production</option>
+                        </select>
+                        <ChevronDown className="select-icon" />
                     </div>
                 </motion.div>
 
@@ -151,10 +165,15 @@ export function ProjectForm({ onDeploy, isActive }) {
                                     name="deploymentType"
                                     value={option.id}
                                     checked={formData.deploymentType === option.id}
-                                    onChange={(e) => setFormData({
-                                        ...formData,
-                                        deploymentType: e.target.value
-                                    })}
+                                    onChange={(e) => {
+                                        setFormData({
+                                            ...formData,
+                                            deploymentType: e.target.value
+                                        });
+                                        if (e.target.value === 'singleCommand') {
+                                            setShowLanguageSelect(true);
+                                        }
+                                    }}
                                 />
                                 <option.icon className="deployment-icon" />
                                 <span>{option.label}</span>
@@ -331,20 +350,40 @@ export function ProjectForm({ onDeploy, isActive }) {
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="deployment-config"
+                        className="deployment-config space-y-4"
                     >
-                        <label className="input-label">Command</label>
-                        <div className="input-wrapper">
-                            <input
-                                type="text"
-                                value={formData.singleCommand.command}
-                                onChange={(e) => setFormData({
-                                    ...formData,
-                                    singleCommand: { ...formData.singleCommand, command: e.target.value }
-                                })}
-                                placeholder="npm start"
-                                className="text-input"
-                            />
+                        <div>
+                            <label className="input-label">Language</label>
+                            <div className="input-wrapper">
+                                <select
+                                    value={formData.singleCommand.language}
+                                    onChange={(e) => setFormData({
+                                        ...formData,
+                                        singleCommand: { ...formData.singleCommand, language: e.target.value }
+                                    })}
+                                    className="select-input"
+                                >
+                                    <option value="Python 3">Python 3</option>
+                                    <option value="Node">Node.js</option>
+                                    <option value="Rust">Rust</option>
+                                </select>
+                                <ChevronDown className="select-icon" />
+                            </div>
+                        </div>
+                        <div>
+                            <label className="input-label">Command</label>
+                            <div className="input-wrapper">
+                                <input
+                                    type="text"
+                                    value={formData.singleCommand.command}
+                                    onChange={(e) => setFormData({
+                                        ...formData,
+                                        singleCommand: { ...formData.singleCommand, command: e.target.value }
+                                    })}
+                                    placeholder="python app.py"
+                                    className="text-input"
+                                />
+                            </div>
                         </div>
                     </motion.div>
                 )}
@@ -370,6 +409,7 @@ export function ProjectForm({ onDeploy, isActive }) {
                                 Add Variable
                             </motion.button>
                             <motion.button
+                                onClick={importEnvFile}
                                 className="env-var-button secondary"
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
@@ -453,3 +493,5 @@ export function ProjectForm({ onDeploy, isActive }) {
         </motion.div>
     );
 }
+
+export default ProjectForm;
