@@ -41,13 +41,12 @@ const LogsTable = ({ logs }) => (
             <td>{log.timestamp}</td>
             <td>
               <span
-                className={`badge ${
-                  log.level === "ERROR"
+                className={`badge ${log.level === "ERROR"
                     ? "badge-error"
                     : log.level === "WARN"
-                    ? "badge-warning"
-                    : "badge-success"
-                }`}
+                      ? "badge-warning"
+                      : "badge-success"
+                  }`}
               >
                 {log.level}
               </span>
