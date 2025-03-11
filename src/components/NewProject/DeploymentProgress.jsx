@@ -1,14 +1,51 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle, Loader2, XCircle } from 'lucide-react';
+import { useNavigate } from "react-router-dom";
 import './styles/DeploymentProgress.css';
 
 export function DeploymentProgress() {
-    const [steps] = React.useState([
+    const navigate = useNavigate();
+
+    const [steps, setSteps] = useState([
         { name: 'Import', status: 'completed' },
         { name: 'Test', status: 'loading' },
         { name: 'Deploy', status: 'pending' },
     ]);
+
+    useEffect(() => {
+        let timeout;
+
+        if (steps[1].status === 'loading') {
+            timeout = setTimeout(() => {
+                setSteps(prevSteps => [
+                    { ...prevSteps[0] },
+                    { ...prevSteps[1], status: 'completed' },
+                    { ...prevSteps[2] }
+                ]);
+            }, 3000);
+        }
+
+        if (steps[1].status === 'completed' && steps[2].status === 'pending') {
+            timeout = setTimeout(() => {
+                setSteps(prevSteps => [
+                    { ...prevSteps[0] },
+                    { ...prevSteps[1] },
+                    { ...prevSteps[2], status: 'completed' }
+                ]);
+            }, 2000);
+        }
+
+
+        if (steps.every(step => step.status === 'completed')) {
+            timeout = setTimeout(() => {
+                navigate("/");
+            }, 1000);
+        }
+
+        return () => clearTimeout(timeout);
+
+    }, [steps, navigate]);
 
     return (
         <div className="deployment-container">
@@ -26,7 +63,7 @@ export function DeploymentProgress() {
                         <motion.div
                             className="progress-line-fill"
                             initial={{ width: '0%' }}
-                            animate={{ width: '33%' }}
+                            animate={{ width: `${(steps.filter(s => s.status !== 'pending').length / steps.length) * 100}%` }}
                             transition={{ duration: 0.8, ease: 'easeInOut' }}
                         />
                     </div>
