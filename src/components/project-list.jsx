@@ -29,7 +29,7 @@ export default function ProjectList({ projects }) {
 function ProjectCard({ project }) {
   return (
     <div className="project-card">
-      <div className="card-top">
+      <div className="">
         <div className="card-header">
           <div>
             <h3 className="project-title" style={{color:"white"}}>{project.name}</h3>

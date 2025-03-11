@@ -10,11 +10,11 @@ const Navbar = () => {
       <div className="nav-container">
         <h1 className="nav-title" style={{color:"white"}}>Auto Deployer</h1>
         <div className="nav-buttons">
-          <button onClick={() => navigate("/new-project")} className="btn-primary">
+          <button onClick={() => navigate("/new-project")} className="navbar-btn-primary">
             <PlusCircle className="icon" />
             Create New Project
           </button>
-          <button className="btn-outline" onClick={() => navigate("/profile")}>
+          <button className="navbar-btn-outline" onClick={() => navigate("/profile")}>
             <User className="icon" style={{color:"white"}}/>
             <span style={{color:"white"}}>Profile</span>
           </button>

@@ -8,7 +8,7 @@ const data = [
 
 export default function CPUUsageGraph() {
   return (
-    <div style={{ width: "100%", height: "250px", padding: "10px", background: "rgba(255, 255, 255, 0.1)", borderRadius: "8px" }}>
+    <div style={{ width: "100%", height: "400px", padding: "10px", background: "rgba(255, 255, 255, 0.1)", borderRadius: "8px" }}>
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={data}>
           <CartesianGrid stroke="rgba(255, 255, 255, 0.2)" strokeDasharray="3 3" />
