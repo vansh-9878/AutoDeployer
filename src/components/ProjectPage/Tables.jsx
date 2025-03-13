@@ -28,8 +28,9 @@ const MetricCard = ({ title, value, change, icon }) => (
 
 const LogsTable = ({ logs }) => (
   <div className="table-container">
+    <div className="table-overlay">
     <table className="table">
-      <thead>
+      <thead className="table-thead">
         <tr>
           <th>Timestamp</th>
           <th>Level</th>
@@ -58,6 +59,7 @@ const LogsTable = ({ logs }) => (
         ))}
       </tbody>
     </table>
+    </div>
   </div>
 );
 
