@@ -39,7 +39,6 @@ export const ProjectContextProvider = ({ children }) => {
         ];
   });
 
-  // Save newProject to localStorage whenever it changes
   const updateProjects = (projects) => {
     setNewProject(projects);
     localStorage.setItem("projects", JSON.stringify(projects));
