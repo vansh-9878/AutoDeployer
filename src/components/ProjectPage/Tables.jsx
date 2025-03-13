@@ -8,6 +8,7 @@ import {
   Cpu,
   MemoryStick as Memory,
 } from "lucide-react";
+import CPUUsageGraph from "../Graph";
 
 const MetricCard = ({ title, value, change, icon }) => (
   <div className="metric-card">
@@ -41,12 +42,13 @@ const LogsTable = ({ logs }) => (
             <td>{log.timestamp}</td>
             <td>
               <span
-                className={`badge ${log.level === "ERROR"
+                className={`badge ${
+                  log.level === "ERROR"
                     ? "badge-error"
                     : log.level === "WARN"
-                      ? "badge-warning"
-                      : "badge-success"
-                  }`}
+                    ? "badge-warning"
+                    : "badge-success"
+                }`}
               >
                 {log.level}
               </span>
@@ -121,7 +123,7 @@ const Dashboard = ({ activeSection }) => {
                     color: "var(--gray-500)",
                   }}
                 >
-                  Resource consumption graph will be displayed here
+                  <CPUUsageGraph />
                 </div>
               </div>
               <div className="metric-card">
@@ -177,7 +179,7 @@ const Dashboard = ({ activeSection }) => {
                   color: "var(--gray-500)",
                 }}
               >
-                Response time graph will be displayed here
+                <CPUUsageGraph />
               </div>
             </div>
             <div className="metric-card">
@@ -452,73 +454,73 @@ const Dashboard = ({ activeSection }) => {
           </div>
         );
 
-      case "settings":
-        return (
-          <div className="space-y-6">
-            <div className="metric-card">
-              <h2 className="metric-title">Deployment Settings</h2>
-              <div className="space-y-4">
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <div>
-                    <span style={{ fontWeight: "500" }}>Auto Scaling</span>
-                    <p
-                      style={{ fontSize: "0.875rem", color: "var(--gray-500)" }}
-                    >
-                      Automatically adjust resources based on load
-                    </p>
-                  </div>
-                  <div className="toggle">
-                    <div className="toggle-slider"></div>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <div>
-                    <span style={{ fontWeight: "500" }}>Health Checks</span>
-                    <p
-                      style={{ fontSize: "0.875rem", color: "var(--gray-500)" }}
-                    >
-                      Monitor system health every 5 minutes
-                    </p>
-                  </div>
-                  <div className="toggle">
-                    <div className="toggle-slider"></div>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <div>
-                    <span style={{ fontWeight: "500" }}>Backup Schedule</span>
-                    <p
-                      style={{ fontSize: "0.875rem", color: "var(--gray-500)" }}
-                    >
-                      Daily backups at 00:00 UTC
-                    </p>
-                  </div>
-                  <div className="toggle">
-                    <div className="toggle-slider"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
+      // case "settings":
+      //   return (
+      //     <div className="space-y-6">
+      //       <div className="metric-card">
+      //         <h2 className="metric-title">Deployment Settings</h2>
+      //         <div className="space-y-4">
+      //           <div
+      //             style={{
+      //               display: "flex",
+      //               justifyContent: "space-between",
+      //               alignItems: "center",
+      //             }}
+      //           >
+      //             <div>
+      //               <span style={{ fontWeight: "500" }}>Auto Scaling</span>
+      //               <p
+      //                 style={{ fontSize: "0.875rem", color: "var(--gray-500)" }}
+      //               >
+      //                 Automatically adjust resources based on load
+      //               </p>
+      //             </div>
+      //             <div className="toggle">
+      //               <div className="toggle-slider"></div>
+      //             </div>
+      //           </div>
+      //           <div
+      //             style={{
+      //               display: "flex",
+      //               justifyContent: "space-between",
+      //               alignItems: "center",
+      //             }}
+      //           >
+      //             <div>
+      //               <span style={{ fontWeight: "500" }}>Health Checks</span>
+      //               <p
+      //                 style={{ fontSize: "0.875rem", color: "var(--gray-500)" }}
+      //               >
+      //                 Monitor system health every 5 minutes
+      //               </p>
+      //             </div>
+      //             <div className="toggle">
+      //               <div className="toggle-slider"></div>
+      //             </div>
+      //           </div>
+      //           <div
+      //             style={{
+      //               display: "flex",
+      //               justifyContent: "space-between",
+      //               alignItems: "center",
+      //             }}
+      //           >
+      //             <div>
+      //               <span style={{ fontWeight: "500" }}>Backup Schedule</span>
+      //               <p
+      //                 style={{ fontSize: "0.875rem", color: "var(--gray-500)" }}
+      //               >
+      //                 Daily backups at 00:00 UTC
+      //               </p>
+      //             </div>
+      //             <div className="toggle">
+      //               <div className="toggle-slider"></div>
+      //             </div>
+      //           </div>
+      //         </div>
+      //       </div>
+      //     </div>
+      //   );
 
       default:
         return null;

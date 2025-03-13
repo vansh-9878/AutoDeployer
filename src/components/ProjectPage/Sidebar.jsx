@@ -62,12 +62,12 @@ const Sidebar = ({ activeSection, onSectionChange }) => {
           active={activeSection === "logs"}
           onClick={() => onSectionChange("logs")}
         />
-        <NavItem
+        {/* <NavItem
           icon={<Settings />}
           text="Settings"
           active={activeSection === "settings"}
           onClick={() => onSectionChange("settings")}
-        />
+        /> */}
       </nav>
     </div>
   );
