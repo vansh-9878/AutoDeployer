@@ -16,6 +16,7 @@ export default function HomePage() {
   }
 
   return (
+    <>
     <div className="container-main">
       <Navbar />
       <main className="main-container">
@@ -35,5 +36,9 @@ export default function HomePage() {
         </div>
       </main>
     </div>
+    <footer>
+    &copy; 2025 Auto Deployer. All rights reserved.
+    </footer>
+    </>
   );
 }
