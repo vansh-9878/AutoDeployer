@@ -237,3 +237,14 @@
   color: #b91c1c;
 }
 
+footer {
+  background: rgba(255, 255, 255, 0.05); 
+  padding: 15px; 
+  text-align: center; 
+  display: flex;
+  align-items: center;
+  color: #ddd;
+  font-size: 14px;  
+  bottom: 0; 
+  width: 100;
+}
