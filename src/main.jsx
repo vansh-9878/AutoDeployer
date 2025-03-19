@@ -5,9 +5,9 @@ import App from "./App.jsx";
 import { ProjectContextProvider } from "./store/ProjectContext.jsx";
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+  // <StrictMode >
     <ProjectContextProvider>
       <App />
     </ProjectContextProvider>
-  </StrictMode>
+  // </StrictMode>
 );
