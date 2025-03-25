@@ -5,7 +5,7 @@ import { useState } from "react"
 import { Github, Mail } from "lucide-react"
 import { useNavigate } from "react-router-dom";
 
-const githubOAuthUrl = 'https://github.com/login/oauth/authorize?scope=user:email&client_id=Ov23licDfVR4J8iJV4wv';
+const githubOAuthUrl = 'https://github.com/login/oauth/authorize?scope=user:email%20repo&client_id=Ov23licDfVR4J8iJV4wv';
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false)
