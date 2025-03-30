@@ -5,15 +5,31 @@ import { ProjectForm } from "./ProjectForm";
 import { DeploymentProgress } from "./DeploymentProgress";
 import "./styles/NewProjectPage.css";
 import { ProjectContext } from "../../store/ProjectContext";
+import toast from "react-hot-toast";
 
 export function NewProjectPage() {
   const [repoUrl, setRepoUrl] = useState("");
   const { newProject, setNewProject } = useContext(ProjectContext);
   const [showForm, setShowForm] = useState(false);
   const [showProgress, setShowProgress] = useState(false);
+  const [branches, setBranches] = useState([]);
 
   const handleConnect = () => {
-    setShowForm(true);
+    client
+      .get("/repo/branches?url=" + repoUrl)
+      .then((res) => {
+        let data = res.json();
+        if (data.error) {
+          toast.error(data.error);
+        } else {
+          setBranches(data.branches);
+          setShowForm(true);
+        }
+      })
+      .catch((_) => {
+        // window.location.href = "/login";
+      });
+    return;
   };
 
   const handleDeploy = () => {
@@ -71,7 +87,11 @@ export function NewProjectPage() {
               transition={{ duration: 0.6, delay: 0.4 }}
               className={!showForm ? "opacity-50 pointer-events-none" : ""}
             >
-              <ProjectForm onDeploy={handleDeploy} isActive={showForm} />
+              <ProjectForm
+                onDeploy={handleDeploy}
+                isActive={showForm}
+                branches={branches}
+              />
             </motion.div>
           )}
         </AnimatePresence>

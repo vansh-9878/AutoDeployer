@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import "./styles/ProjectForm.css";
 
-export function ProjectForm({ onDeploy, isActive }) {
+export function ProjectForm({ onDeploy, isActive, branches }) {
   const [formData, setFormData] = useState({
     name: "",
     branch: "main",
@@ -160,10 +160,16 @@ export function ProjectForm({ onDeploy, isActive }) {
               }
               className="select-input with-icon"
             >
-              <option value="main">main</option>
+              {branches.map((branch) => (
+                <option key={branch} value={branch}>
+                  {branch}
+                </option>
+              ))}
+
+              {/* <option value="main">main</option>
               <option value="develop">develop</option>
               <option value="staging">staging</option>
-              <option value="production">production</option>
+              <option value="production">production</option> */}
             </select>
             <ChevronDown className="select-icon" />
           </div>
