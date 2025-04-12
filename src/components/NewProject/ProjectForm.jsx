@@ -99,6 +99,11 @@ export function ProjectForm({ onDeploy, isActive, branches }) {
     { id: "singleCommand", label: "Single Command", icon: Command },
   ];
 
+  const handleClick = () => {
+    localStorage.setItem("formData", JSON.stringify(formData));
+    onDeploy();
+  };
+
   return (
     <motion.div
       className={`form-container ${!isActive ? "inactive" : ""}`}
@@ -114,15 +119,6 @@ export function ProjectForm({ onDeploy, isActive, branches }) {
       >
         Configure Your Web Service
       </motion.h2>
-      <motion.p
-        className="form-description"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.3 }}
-      >
-        We've detected Python in your repository. Let's set up your deployment
-        configuration.
-      </motion.p>
 
       <div className="space-y-6">
         <motion.div
@@ -563,7 +559,7 @@ export function ProjectForm({ onDeploy, isActive, branches }) {
           transition={{ delay: 0.9 }}
         >
           <motion.button
-            onClick={onDeploy}
+            onClick={handleClick}
             disabled={!formData.name || !formData.deploymentType}
             className={`deploy-button ${
               formData.name && formData.deploymentType ? "enabled" : "disabled"

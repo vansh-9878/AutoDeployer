@@ -7,6 +7,7 @@ import "./styles/NewProjectPage.css";
 import { ProjectContext } from "../../store/ProjectContext";
 import toast from "react-hot-toast";
 import client from "../../api/api";
+import { stringify } from "postcss";
 
 export function NewProjectPage() {
   const [repoUrl, setRepoUrl] = useState("");
@@ -36,7 +37,8 @@ export function NewProjectPage() {
 
   const handleDeploy = () => {
     setShowProgress(true);
-    console.log("hello");
+    let data = JSON.parse(localStorage.getItem("formData"));
+    // console.log(data.name);
     if (localStorage.getItem("newname")) {
       let obj = {
         id: "4",
