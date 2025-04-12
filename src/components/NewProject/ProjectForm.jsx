@@ -18,6 +18,7 @@ export function ProjectForm({ onDeploy, isActive, branches }) {
   const [formData, setFormData] = useState({
     name: "",
     branch: "main",
+    type: 1,
     deploymentType: "",
     language: "",
     dockerCompose: {
@@ -47,6 +48,7 @@ export function ProjectForm({ onDeploy, isActive, branches }) {
 
   const [envVars, setEnvVars] = useState([]);
   const [showLanguageSelect, setShowLanguageSelect] = useState(false);
+  const [count, setCount] = useState(0);
 
   const addEnvVar = () => {
     setEnvVars([...envVars, { name: "", value: "" }]);
@@ -93,10 +95,10 @@ export function ProjectForm({ onDeploy, isActive, branches }) {
   };
 
   const deploymentOptions = [
-    { id: "dockerCompose", label: "Docker Compose", icon: Docker },
-    { id: "dockerfile", label: "Dockerfile", icon: Docker },
-    { id: "shellScript", label: "Shell Script", icon: FileText },
-    { id: "singleCommand", label: "Single Command", icon: Command },
+    { id: "dockerCompose", label: "Docker Compose", icon: Docker, num: 2 },
+    { id: "dockerfile", label: "Dockerfile", icon: Docker, num: 1 },
+    { id: "shellScript", label: "Shell Script", icon: FileText, num: 3 },
+    { id: "singleCommand", label: "Single Command", icon: Command, num: 4 },
   ];
 
   const handleClick = () => {
@@ -199,6 +201,7 @@ export function ProjectForm({ onDeploy, isActive, branches }) {
                   onChange={(e) => {
                     setFormData({
                       ...formData,
+                      type: option.num,
                       deploymentType: e.target.value,
                     });
                     if (e.target.value === "singleCommand") {
