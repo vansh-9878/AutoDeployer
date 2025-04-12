@@ -38,15 +38,35 @@ export function NewProjectPage() {
   const handleDeploy = () => {
     setShowProgress(true);
     let data = JSON.parse(localStorage.getItem("formData"));
-    let obj = {
-      "name": "lol",
-      "branch": "hell",
-      "type": 2,
-      "deployment_info": {
-        "file_location": "./hello/wtv"
-      },
-      "environment_variables": [["hello", "wtv"], ["lol", "bro"]],
-    };
+    console.log(data);
+    if (data.type == "1") {
+      let obj = {
+        "name": data.name,
+        "branch": data.branch,
+        "type": data.type,
+        "deployment_info": {
+          "file_location": data.dockerfile.location,
+          "host_ports": data.dockerfile.hostPort,
+          "container_ports": data.dockerfile.containerPort,
+          "volumes": [
+            [data.dockerfile.hostPath, data.dockerfile.containerPath]
+          ],
+          "network_mode": data.dockerfile.networkMode,
+          "network_name": data.dockerfile.networkName,
+        },
+        "environment_variables": [["hello", "wtv"], ["lol", "bro"]],
+      }
+    } else {
+      let obj = {
+        "name": data.name,
+        "branch": data.branch,
+        "type": data.type,
+        "deployment_info": {
+          "file_location": data.shellScript.location
+        },
+        "environment_variables": [["hello", "wtv"], ["lol", "bro"]],
+      };
+    }
     let arr = [...newProject];
     arr.push(obj);
     setNewProject(arr);
