@@ -6,6 +6,7 @@ import { DeploymentProgress } from "./DeploymentProgress";
 import "./styles/NewProjectPage.css";
 import { ProjectContext } from "../../store/ProjectContext";
 import toast from "react-hot-toast";
+import client from "../../api/api";
 
 export function NewProjectPage() {
   const [repoUrl, setRepoUrl] = useState("");
@@ -18,11 +19,12 @@ export function NewProjectPage() {
     client
       .get("/repo/branches?url=" + repoUrl)
       .then((res) => {
-        let data = res.json();
-        if (data.error) {
-          toast.error(data.error);
+        // let data = res.json();
+        // console.log(res);
+        if (res.error) {
+          toast.error(res.error);
         } else {
-          setBranches(data.branches);
+          setBranches(res.data.branches);
           setShowForm(true);
         }
       })
