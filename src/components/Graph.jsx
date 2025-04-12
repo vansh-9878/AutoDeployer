@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   LineChart,
   Line,
@@ -7,14 +8,34 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import client from "../api/api";
 
-const data = [
-  { time: "10:00", cpu: 30 },
-  { time: "10:10", cpu: 60 },
-  { time: "10:20", cpu: 20 },
-];
+// const data = [
+//   { time: "10:00", cpu: 30 },
+//   { time: "10:10", cpu: 60 },
+//   { time: "10:20", cpu: 20 },
+// ];
 
 export default function CPUUsageGraph() {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const hitApi = () => {
+      client
+      .get("/dashboard/graph")
+      .then((res) => {
+        setData(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }
+    hitApi()
+    const interval = setInterval(() => {
+      hitApi();
+    }, 60000);
+    return () => clearInterval(interval);
+  }, []);
   return (
     <div
       style={{
