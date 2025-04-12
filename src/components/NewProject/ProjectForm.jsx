@@ -100,7 +100,13 @@ export function ProjectForm({ onDeploy, isActive, branches }) {
   ];
 
   const handleClick = () => {
-    localStorage.setItem("formData", JSON.stringify(formData));
+    const updatedFormData = {
+      ...formData,
+      items: envVars,
+    };
+
+    setFormData(updatedFormData);
+    localStorage.setItem("formData", JSON.stringify(updatedFormData));
     onDeploy();
   };
 
@@ -341,8 +347,8 @@ export function ProjectForm({ onDeploy, isActive, branches }) {
                     <input
                       type="radio"
                       name="networkMode"
-                      value="host"
-                      checked={formData.dockerfile.networkMode === "host"}
+                      value="1"
+                      checked={formData.dockerfile.networkMode === "1"}
                       onChange={(e) =>
                         setFormData({
                           ...formData,
@@ -359,8 +365,8 @@ export function ProjectForm({ onDeploy, isActive, branches }) {
                     <input
                       type="radio"
                       name="networkMode"
-                      value="bridge"
-                      checked={formData.dockerfile.networkMode === "bridge"}
+                      value="2"
+                      checked={formData.dockerfile.networkMode === "2"}
                       onChange={(e) =>
                         setFormData({
                           ...formData,
