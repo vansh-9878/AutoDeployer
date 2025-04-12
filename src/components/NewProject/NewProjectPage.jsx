@@ -39,24 +39,56 @@ export function NewProjectPage() {
     setShowProgress(true);
     let data = JSON.parse(localStorage.getItem("formData"));
     console.log(data);
-    let obj = {
-      name: "lol",
-      branch: "hell",
-      type: 2,
-      deployment_info: {
-        file_location: "./hello/wtv",
-      },
-      environment_variables: [
-        ["hello", "wtv"],
-        ["lol", "bro"],
-      ],
-    };
+    data.type = 2;
+    const nestedArray = data.items.map(({ key, value }) => [key, value]);
+    let obj = {};
+    if (data.type === 1) {
+      obj = {
+        name: data.name,
+        branch: data.branch,
+        type: data.type,
+        deployment_info: {
+          file_location: data.dockerfile.location,
+          host_ports: data.dockerfile.hostPort,
+          container_ports: data.dockerfile.containerPort,
+          volumes: [[data.dockerfile.hostPath, data.dockerfile.containerPath]],
+          network_mode: data.dockerfile.networkMode,
+          network_name: data.dockerfile.networkName,
+        },
+        environment_variables: nestedArray,
+      };
+    } else if (data.type === 4) {
+      obj = {
+        name: data.name,
+        branch: data.branch,
+        type: data.type,
+        repo_url: repoUrl,
+        deployment_info: {
+          file_location: data.shellScript.location,
+          language: data.singleCommand.language,
+        },
+        environment_variables: nestedArray,
+      };
+    } else {
+      obj = {
+        name: data.name,
+        branch: data.branch,
+        type: data.type,
+        repo_url: repoUrl,
+        deployment_info: {
+          file_location: data.shellScript.location,
+        },
+        environment_variables: nestedArray,
+      };
+    }
+
+    console.log(obj);
     let arr = [...newProject];
     arr.push(obj);
     setNewProject(arr);
     localStorage.setItem("projects", JSON.stringify(arr));
     client
-      .get("/repo/branches?url=" + repoUrl)
+      .post("/project/new", (data = obj))
       .then((res) => {
         if (res.error) {
           toast.error(res.error);
