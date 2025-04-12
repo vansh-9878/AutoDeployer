@@ -59,7 +59,8 @@ export function NewProjectPage() {
         },
         "environment_variables": nestedArray,
       }
-    } else {
+    }
+    else if (data.type === 4) {
       obj = {
         "name": data.name,
         "branch": data.branch,
@@ -68,6 +69,18 @@ export function NewProjectPage() {
         "deployment_info": {
           "file_location": data.shellScript.location,
           "language": data.singleCommand.language
+        },
+        "environment_variables": nestedArray,
+      };
+    }
+    else {
+      obj = {
+        "name": data.name,
+        "branch": data.branch,
+        "type": data.type,
+        "repo_url": repoUrl,
+        "deployment_info": {
+          "file_location": data.shellScript.location,
         },
         "environment_variables": nestedArray,
       };
