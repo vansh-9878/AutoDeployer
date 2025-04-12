@@ -38,14 +38,18 @@ export function NewProjectPage() {
   const handleDeploy = () => {
     setShowProgress(true);
     let data = JSON.parse(localStorage.getItem("formData"));
+    console.log(data);
     let obj = {
-      "name": "lol",
-      "branch": "hell",
-      "type": 2,
-      "deployment_info": {
-        "file_location": "./hello/wtv"
+      name: "lol",
+      branch: "hell",
+      type: 2,
+      deployment_info: {
+        file_location: "./hello/wtv",
       },
-      "environment_variables": [["hello", "wtv"], ["lol", "bro"]],
+      environment_variables: [
+        ["hello", "wtv"],
+        ["lol", "bro"],
+      ],
     };
     let arr = [...newProject];
     arr.push(obj);
