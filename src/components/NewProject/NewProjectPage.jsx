@@ -36,21 +36,34 @@ export function NewProjectPage() {
 
   const handleDeploy = () => {
     setShowProgress(true);
-    console.log("hello");
-    if (localStorage.getItem("newname")) {
-      let obj = {
-        id: "4",
-        name: localStorage.getItem("newname"),
-        description: "This is a new project",
-        status: "online",
-        lastDeployed: "Just now",
-        url: "https://blog-api-example.vercel.app",
-      };
-      let arr = [...newProject];
-      arr.push(obj);
-      setNewProject(arr);
-      localStorage.setItem("projects", JSON.stringify(arr));
-    }
+    let data = JSON.parse(localStorage.getItem("formData"));
+    let obj = {
+      "name": "lol",
+      "branch": "hell",
+      "type": 2,
+      "deployment_info": {
+        "file_location": "./hello/wtv"
+      },
+      "environment_variables": [["hello", "wtv"], ["lol", "bro"]],
+    };
+    let arr = [...newProject];
+    arr.push(obj);
+    setNewProject(arr);
+    localStorage.setItem("projects", JSON.stringify(arr));
+    client
+      .get("/repo/branches?url=" + repoUrl)
+      .then((res) => {
+        if (res.error) {
+          toast.error(res.error);
+        } else {
+          setBranches(res.data.branches);
+          setShowForm(true);
+        }
+      })
+      .catch((_) => {
+        // window.location.href = "/login";
+      });
+    return;
   };
 
   return (

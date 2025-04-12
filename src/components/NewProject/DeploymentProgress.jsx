@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle, Loader2, XCircle } from 'lucide-react';
+import { CheckCircle } from 'lucide-react';
 import { useNavigate } from "react-router-dom";
 import './styles/DeploymentProgress.css';
 
@@ -9,8 +9,7 @@ export function DeploymentProgress() {
 
     const [steps, setSteps] = useState([
         { name: 'Import', status: 'completed' },
-        { name: 'Test', status: 'loading' },
-        { name: 'Deploy', status: 'pending' },
+        { name: 'Deploy', status: 'loading' },
     ]);
 
     useEffect(() => {
@@ -21,21 +20,9 @@ export function DeploymentProgress() {
                 setSteps(prevSteps => [
                     { ...prevSteps[0] },
                     { ...prevSteps[1], status: 'completed' },
-                    { ...prevSteps[2] }
                 ]);
             }, 3000);
         }
-
-        if (steps[1].status === 'completed' && steps[2].status === 'pending') {
-            timeout = setTimeout(() => {
-                setSteps(prevSteps => [
-                    { ...prevSteps[0] },
-                    { ...prevSteps[1] },
-                    { ...prevSteps[2], status: 'completed' }
-                ]);
-            }, 2000);
-        }
-
 
         if (steps.every(step => step.status === 'completed')) {
             timeout = setTimeout(() => {
@@ -44,7 +31,6 @@ export function DeploymentProgress() {
         }
 
         return () => clearTimeout(timeout);
-
     }, [steps, navigate]);
 
     return (
@@ -123,8 +109,8 @@ export function DeploymentProgress() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.8 }}
             >
-                <p className="progress-message">Building and testing your application...</p>
-                <p className="progress-submessage">This might take a few minutes</p>
+                <p className="progress-message">Deploying your application...</p>
+                <p className="progress-submessage">This might take a few seconds</p>
                 <motion.div
                     className="progress-bar"
                     initial={{ opacity: 0 }}
