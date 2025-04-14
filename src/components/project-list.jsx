@@ -7,11 +7,9 @@ export default function ProjectList({ projects }) {
       <div className="empty-container">
         <div>
           <h3 className="empty-title">You are yet to deploy your projects</h3>
-          <p className="empty-message">Create your first project to get started</p>
-          <button className="button-primary">
-            <PlusCircle className="icon-small" />
-            Create New Project
-          </button>
+          <p className="empty-message">
+            Create your first project to get started
+          </p>
         </div>
       </div>
     );
@@ -32,20 +30,23 @@ function ProjectCard({ project }) {
       <div className="">
         <div className="card-header">
           <div>
-            <h3 className="project-title" style={{color:"white"}}>{project.name}</h3>
-            <p className="project-description" >{project.description}</p>
+            <h3 className="project-title" style={{ color: "white" }}>
+              {project.name}
+            </h3>
+            <p className="project-description">{project.repo_name}</p>
           </div>
-          <StatusBadge status={project.status} />
+          <StatusBadge status="yes" />
         </div>
       </div>
       <div className="card-bottom">
         <div className="card-info">
-          <div className="deploy-time">Last deployed: {project.lastDeployed}</div>
+          <div className="deploy-time">Last deployed: 12 mins</div>
           <div className="button-group">
-            
             <button
               className="button-primary button-flex"
-              onClick={() => (window.location.href = `/myproject/${project.id}`)}
+              onClick={() =>
+                (window.location.href = `/myproject/${project.id}`)
+              }
             >
               <span className="icon-text">🔗</span> Visit
             </button>

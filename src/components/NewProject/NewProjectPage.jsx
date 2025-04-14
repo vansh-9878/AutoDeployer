@@ -11,7 +11,6 @@ import { stringify } from "postcss";
 
 export function NewProjectPage() {
   const [repoUrl, setRepoUrl] = useState("");
-  const { newProject, setNewProject } = useContext(ProjectContext);
   const [showForm, setShowForm] = useState(false);
   const [showProgress, setShowProgress] = useState(false);
   const [branches, setBranches] = useState([]);
@@ -82,11 +81,11 @@ export function NewProjectPage() {
       };
     }
 
-    console.log(obj);
-    let arr = [...newProject];
-    arr.push(obj);
-    setNewProject(arr);
-    localStorage.setItem("projects", JSON.stringify(arr));
+    // console.log(obj);
+    // let arr = [...newProject];
+    // arr.push(obj);
+    // setNewProject(arr);
+    // localStorage.setItem("projects", JSON.stringify(arr));
     client
       .post("/project/new", (data = obj))
       .then((res) => {
