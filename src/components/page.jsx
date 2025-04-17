@@ -20,7 +20,7 @@ export default function HomePage() {
         if (res.error) {
           toast.error(res.error);
         } else {
-          setNewProject(res);
+          setNewProject(res.data);
         }
       })
       .catch((_) => {

@@ -2,7 +2,8 @@ import React from "react";
 import { ExternalLink, Settings } from "lucide-react";
 
 export default function ProjectList({ projects }) {
-  if (projects.length === 0) {
+  console.log(projects);
+  if (!projects || projects.length === 0) {
     return (
       <div className="empty-container">
         <div>
@@ -14,7 +15,8 @@ export default function ProjectList({ projects }) {
       </div>
     );
   }
-
+  console.log("whar aare you then?", projects)
+  console.log("check this bro:", projects.length)
   return (
     <div className="project-wrapper">
       {projects.map((project) => (
@@ -35,7 +37,7 @@ function ProjectCard({ project }) {
             </h3>
             <p className="project-description">{project.repo_name}</p>
           </div>
-          <StatusBadge status="yes" />
+          <StatusBadge status="online" />
         </div>
       </div>
       <div className="card-bottom">

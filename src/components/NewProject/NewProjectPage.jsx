@@ -37,8 +37,6 @@ export function NewProjectPage() {
   const handleDeploy = () => {
     setShowProgress(true);
     let data = JSON.parse(localStorage.getItem("formData"));
-    console.log(data);
-    data.type = 2;
     const nestedArray = data.items.map(({ key, value }) => [key, value]);
     let obj = {};
     if (data.type === 1) {
@@ -46,12 +44,13 @@ export function NewProjectPage() {
         name: data.name,
         branch: data.branch,
         type: data.type,
+        repo_url: repoUrl,
         deployment_info: {
           file_location: data.dockerfile.location,
           host_ports: data.dockerfile.hostPort,
           container_ports: data.dockerfile.containerPort,
           volumes: [[data.dockerfile.hostPath, data.dockerfile.containerPath]],
-          network_mode: data.dockerfile.networkMode,
+          network_mode: Number(data.dockerfile.networkMode),
           network_name: data.dockerfile.networkName,
         },
         environment_variables: nestedArray,
