@@ -95,7 +95,7 @@ export function ProjectForm({ onDeploy, isActive, branches }) {
   };
 
   const deploymentOptions = [
-    { id: "dockerCompose", label: "Docker Compose", icon: Docker, num: 2 },
+    // { id: "dockerCompose", label: "Docker Compose", icon: Docker, num: 2 },
     { id: "dockerfile", label: "Dockerfile", icon: Docker, num: 1 },
     { id: "shellScript", label: "Shell Script", icon: FileText, num: 3 },
     { id: "singleCommand", label: "Single Command", icon: Command, num: 4 },
