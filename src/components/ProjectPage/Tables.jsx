@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import {
   Activity,
   ArrowUp,
@@ -29,36 +29,36 @@ const MetricCard = ({ title, value, change, icon }) => (
 const LogsTable = ({ logs }) => (
   <div className="table-container">
     <div className="table-overlay">
-    <table className="table">
-      <thead className="table-thead">
-        <tr>
-          <th>Timestamp</th>
-          <th>Level</th>
-          <th>Message</th>
-        </tr>
-      </thead>
-      <tbody>
-        {logs.map((log, index) => (
-          <tr key={index}>
-            <td>{log.timestamp}</td>
-            <td>
-              <span
-                className={`badge ${
-                  log.level === "ERROR"
-                    ? "badge-error"
-                    : log.level === "WARN"
-                    ? "badge-warning"
-                    : "badge-success"
-                }`}
-              >
-                {log.level}
-              </span>
-            </td>
-            <td>{log.message}</td>
+      <table className="table">
+        <thead className="table-thead">
+          <tr>
+            <th>Timestamp</th>
+            <th>Level</th>
+            <th>Message</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {logs.map((log, index) => (
+            <tr key={index}>
+              <td>{log.timestamp}</td>
+              <td>
+                <span
+                  className={`badge ${
+                    log.level === "ERROR"
+                      ? "badge-error"
+                      : log.level === "WARN"
+                      ? "badge-warning"
+                      : "badge-success"
+                  }`}
+                >
+                  {log.level}
+                </span>
+              </td>
+              <td>{log.message}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   </div>
 );
@@ -81,8 +81,23 @@ const Dashboard = ({ activeSection }) => {
       message: "Failed to connect to database",
     },
   ];
-
+  const [info, setInfo] = useState({});
   const renderContent = () => {
+    useEffect(() => {
+      client
+        .get("/project/resources")
+        .then((res) => {
+          if (res.error) {
+            toast.error(res.error);
+          } else {
+            setInfo(res.data);
+          }
+        })
+        .catch((_) => {
+          // window.location.href = "/login";
+        });
+      return;
+    }, []);
     switch (activeSection) {
       case "health":
         return (
@@ -90,13 +105,13 @@ const Dashboard = ({ activeSection }) => {
             <div className="grid grid-cols-4 mb-8">
               <MetricCard
                 title="CPU Usage"
-                value="45%"
+                value={info.cpu}
                 change={5}
                 icon={<Cpu size={24} />}
               />
               <MetricCard
                 title="Memory Usage"
-                value="2.4GB"
+                value={info.mem}
                 change={-2}
                 icon={<Memory size={24} />}
               />
@@ -228,13 +243,13 @@ const Dashboard = ({ activeSection }) => {
             <div className="grid grid-cols-4">
               <MetricCard
                 title="CPU Usage"
-                value="45%"
+                value={info.cpu}
                 change={5}
                 icon={<Cpu size={24} />}
               />
               <MetricCard
                 title="Memory Usage"
-                value="2.4GB"
+                value={info.mem}
                 change={-2}
                 icon={<Memory size={24} />}
               />

@@ -32,19 +32,19 @@ const Sidebar = ({ activeSection, onSectionChange }) => {
           active={activeSection === "health"}
           onClick={() => onSectionChange("health")}
         />
-        <NavItem
+        {/* <NavItem
           icon={<Clock />}
           text="Response Time"
           active={activeSection === "response"}
           onClick={() => onSectionChange("response")}
-        />
+        /> */}
         <NavItem
           icon={<Database />}
           text="Resources"
           active={activeSection === "resources"}
           onClick={() => onSectionChange("resources")}
         />
-        <NavItem
+        {/* <NavItem
           icon={<Server />}
           text="Ports"
           active={activeSection === "ports"}
@@ -61,7 +61,7 @@ const Sidebar = ({ activeSection, onSectionChange }) => {
           text="Logs"
           active={activeSection === "logs"}
           onClick={() => onSectionChange("logs")}
-        />
+        /> */}
       </nav>
     </div>
   );
