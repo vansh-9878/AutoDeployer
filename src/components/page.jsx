@@ -12,6 +12,11 @@ export default function HomePage() {
   const { newProject, setNewProject } = useContext(ProjectContext);
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+      return;
+    }
     client
       .get("/project/list")
       .then((res) => {

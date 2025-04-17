@@ -62,7 +62,7 @@ export function NewProjectPage() {
         type: data.type,
         repo_url: repoUrl,
         deployment_info: {
-          file_location: data.shellScript.location,
+          file_location: data.singleCommand.location,
           language: data.singleCommand.language,
         },
         environment_variables: nestedArray,
