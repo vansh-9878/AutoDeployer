@@ -42,7 +42,7 @@ function ProjectCard({ project }) {
       </div>
       <div className="card-bottom">
         <div className="card-info">
-          <div className="deploy-time">Last deployed: 12 mins</div>
+          {/* <div className="deploy-time">Last deployed: 12 mins</div> */}
           <div className="button-group">
             <button
               className="button-primary button-flex"

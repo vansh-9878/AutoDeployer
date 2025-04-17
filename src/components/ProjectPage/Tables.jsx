@@ -108,7 +108,7 @@ const Dashboard = ({ activeSection }) => {
               />
               <MetricCard
                 title="Active Ports"
-                value="3"
+                value="1"
                 change={0}
                 icon={<Server size={24} />}
               />
