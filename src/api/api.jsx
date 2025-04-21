@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const client = axios.create({
-  baseURL: "https://api.udk.me/api",
+  baseURL: "http://localhost:8494/api",
   headers: {
     "Content-Type": "application/json",
   },

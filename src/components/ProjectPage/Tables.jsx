@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Activity,
   ArrowUp,
@@ -9,6 +9,7 @@ import {
   MemoryStick as Memory,
 } from "lucide-react";
 import CPUUsageGraph from "../Graph";
+import client from "../../api/api";
 
 const MetricCard = ({ title, value, change, icon }) => (
   <div className="metric-card">
